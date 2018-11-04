@@ -9,12 +9,30 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    // Mark - Outlets
+    @IBOutlet weak var enterpriseView: UIImageView!
+    @IBOutlet var tapGestureRecornizer: UITapGestureRecognizer!
+    
+    // Mark - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        view.addGestureRecognizer(tapGestureRecornizer)
     }
-
-
+    
+    // MARK: - IBActions
+    @IBAction func userDidTap(_ sender: UITapGestureRecognizer) {
+        let newCenter = tapGestureRecornizer.location(in: self.view)
+        
+        UIView.animate(withDuration: 1,
+                       delay: 0,
+                       options: [.curveEaseInOut, .beginFromCurrentState],
+                       animations: {
+                        self.enterpriseView.center = newCenter
+                       },
+                       completion: nil
+        )
+    }
 }
 
